@@ -82,15 +82,17 @@ body {
 
 
 
- #npc-wrapper {
+#npc-wrapper {
+    position: relative;
+    right: 10px;
     color: white;
-    max-width: 1000px;
-    margin: 20px auto;
+    width: 99%;
+    margin: 0px;
     padding: 16px;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-  }
+}
 
   #npc-wrapper h2 {
     margin: 0 0 12px;
@@ -184,14 +186,16 @@ body {
   }
 
 
-  #npc-list {
-  display: flex;
-  flex-wrap: wrap; /* чтобы карточки переносились на новую строку */
-  gap: 12px;       /* расстояние между карточками */
+ #npc-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
 }
 
 .npc-card .npc-row:first-child input {
   color: orange;   /* оранжевый текст для имени NPC */
   font-weight: bold; /* можно сделать имя чуть более заметным */
 }
+
 
