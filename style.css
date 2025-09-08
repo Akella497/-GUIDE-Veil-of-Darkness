@@ -86,7 +86,7 @@ body {
     position: relative;
     right: 10px;
     color: white;
-    width: 99%;
+    width: 99% !important;
     margin: 0px;
     padding: 16px;
     background: rgba(0, 0, 0, 0.3);
@@ -110,7 +110,7 @@ body {
   }
 
   .npc-card {
-  width: 24%;      /* две карточки в ряд */
+  width: 24% !important;      /* две карточки в ряд */
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -185,6 +185,7 @@ body {
   color: orange;   /* оранжевый текст для имени NPC */
   font-weight: bold; /* можно сделать имя чуть более заметным */
 }
+
 
 
 
