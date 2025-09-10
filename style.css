@@ -187,6 +187,67 @@ body {
 }
 
 
+/* --- Базовые стили оставляем как есть --- */
+
+/* Адаптация под планшеты */
+@media screen and (max-width: 1024px) {
+  .blocks,
+  .blocks2 {
+    grid-template-columns: 1fr 1fr;   /* две колонки */
+    grid-template-areas:
+      "d d"
+      "a b"
+      "c c";
+    gap: 1.5rem;
+    font-size: 13pt;
+  }
+
+  .npc-card {
+    width: 45% !important; /* по 2 карточки в ряд */
+  }
+}
+
+/* Адаптация под телефоны */
+@media screen and (max-width: 600px) {
+  .blocks,
+  .blocks2 {
+    grid-template-columns: 1fr;   /* одна колонка */
+    grid-template-areas:
+      "d"
+      "a"
+      "b"
+      "c";
+    gap: 1rem;
+    font-size: 12pt;
+    padding: 0.5rem;
+  }
+
+  .npc-card {
+    width: 100% !important; /* карточки в одну колонку */
+  }
+
+  #npc-wrapper {
+    padding: 8px;
+  }
+
+  #npc-wrapper h2 {
+    font-size: 16px;
+  }
+
+  .npc-row label {
+    flex: 0 0 100px;  /* уменьшаем ширину подписи */
+    font-size: 11pt;
+  }
+
+  .npc-row input,
+  .npc-row textarea {
+    font-size: 11pt;
+    padding: 4px 6px;
+  }
+}
+
+
+
 
 
 
