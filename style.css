@@ -186,30 +186,22 @@ body {
   font-weight: bold; /* можно сделать имя чуть более заметным */
 }
 
-/* Для Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-  width: 6px;   /* толщина полосы */
+  width: 6px;          /* толщина вертикального скролла */
+  height: 6px;         /* толщина горизонтального */
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent; /* фон дорожки */
+  background: black;   /* фон дорожки */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: black;              /* сам ползунок чёрный */
-  border-radius: 10px;
-  box-shadow: 0 0 6px white;      /* белое свечение */
+  background: gray;    /* цвет ползунка */
+  border-radius: 10px; /* скругление */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #222;               /* чуть светлее при наведении */
-  box-shadow: 0 0 8px white;
-}
-
-/* Для Firefox */
-* {
-  scrollbar-width: thin;           /* тонкий */
-  scrollbar-color: black transparent; /* ползунок чёрный, фон прозрачный */
+  background: #a9a9a9; /* светлее при наведении */
 }
 
 
@@ -271,6 +263,7 @@ body {
     padding: 4px 6px;
   }
 }
+
 
 
 
