@@ -11,8 +11,8 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto auto;
     grid-template-areas: 
-    "d d d"
     "e e e"
+    "d d d"
     "a b c" 
     "a b c" 
     "a b c";
@@ -265,6 +265,7 @@ body {
     padding: 4px 6px;
   }
 }
+
 
 
 
