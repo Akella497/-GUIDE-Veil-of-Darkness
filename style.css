@@ -63,7 +63,7 @@ body {
 .blocks2 > .c { grid-area: c; }
 .blocks2 > .d { grid-area: d; }
 
-.blocks2 > .a, .b, .c, .d, .e {
+.blocks2 > .a, .b, .c, .d {
     text-align: justify; 
     background-color: #000000c9; 
     padding: 1rem;
@@ -265,6 +265,7 @@ body {
     padding: 4px 6px;
   }
 }
+
 
 
 
