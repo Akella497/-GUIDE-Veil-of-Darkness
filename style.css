@@ -1,278 +1,53 @@
-body {
-    background: url(https://cdn.imgpile.com/f/iqgryG1_xl.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+  :root{
+      --bg:#0b0a08; --panel:rgba(8,6,4,0.6); --accent:#c9a86b; --muted:#cfc6b8; --danger:#d55; --card-w:320px; --radius:10px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Merriweather', serif;background:var(--bg);color:var(--muted);-webkit-font-smoothing:antialiased}
+    body::before{content:'';position:fixed;inset:0;z-index:-2;background-image:url('https://cdn.imgpile.com/f/iqgryG1_xl.png');background-size:cover;filter:contrast(.9) brightness(.45);opacity:0.78}
+    body::after{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at center, rgba(0,0,0,0) 30%, rgba(0,0,0,0.6) 100%)}
+
+    header{max-width:1200px;margin:20px auto;padding:16px;border-radius:14px;background:var(--panel);border:1px solid rgba(255,255,255,0.03);display:flex;gap:14px;align-items:center}
+    .logo{width:60px;height:60px;border-radius:8px;background:linear-gradient(135deg,#111,#241);display:flex;align-items:center;justify-content:center}
+    header h1{margin:0;font-family:'Cinzel',serif;color:var(--accent);font-size:20px}
+    header p{margin:0;color:rgba(207,198,184,0.9);font-size:13px}
+
+    main{max-width:1200px;margin:18px auto;display:flex;gap:24px;padding:0 12px}
+
+    /* pages layout */
+    .page{display:none;flex:1}
+    .page.active{display:block}
+
+    /* left info panel (page 1) */
+    .info-wrap{background:linear-gradient(180deg, rgba(20,16,12,0.6), rgba(10,8,6,0.55));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .info-wrap h2{font-family:'Cinzel',serif;color:var(--accent)}
+    .info-wrap p{line-height:1.45}
+
+    /* right creator panel (page 2) */
+    .creator-wrap{background:linear-gradient(180deg, rgba(8,6,4,0.6), rgba(6,4,3,0.55));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    #npc-list{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+
+    .npc-card{width:320px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+    .npc-row{display:flex;align-items:center;margin-bottom:8px}
+    .npc-row label{flex:0 0 120px;font-size:13px}
+    .npc-row input{flex:1;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)}
+    .npc-row textarea{width:100%;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted);resize:none}
+    .npc-controls{display:flex;gap:8px;margin-top:8px}
+    .npc-controls button{flex:1;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted);cursor:pointer}
+
+    .top-actions{display:flex;gap:10px;margin-top:8px}
+    .btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    background: linear-gradient(135deg, #111, #241);
 }
 
-.blocks {
-    display: grid;
-    justify-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    grid-template-areas: 
-    "e e e"
-    "d d d"
-    "a b c" 
-    "a b c" 
-    "a b c";
-    font-size: 15pt;
-    padding: 1rem;
-    gap: 3rem;
-    color: white;
-}
-
-.blocks > .a { grid-area: a; }
-.blocks > .b { grid-area: b; }
-.blocks > .c { grid-area: c; }
-.blocks > .d { grid-area: d; }
-.blocks > .e { grid-area: e; }
-
-
-.blocks > .a, .b, .c, .d, .e {
-    text-align: justify; 
-    background-color: #000000c9; 
-    padding: 1rem;
-    background: url(https://cdn.imgpile.com/f/bIpr1VI_xl.webp);
-    background-position: center;
-    background-attachment: scroll;
-    border: white solid 2px;
-}
-
-
-
-
-.blocks2 {
-    display: grid;
-    justify-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    grid-template-areas: 
-    "d d d"
-    "a b c" 
-    "a b c" 
-    "a b c";
-    font-size: 15pt;
-    padding: 1rem;
-    gap: 3rem;
-    color: white;
-}
-
-.blocks2 > .a { grid-area: a; }
-.blocks2 > .b { grid-area: b; }
-.blocks2 > .c { grid-area: c; }
-.blocks2 > .d { grid-area: d; }
-
-.blocks2 > .a, .b, .c, .d {
-    text-align: justify; 
-    background-color: #000000c9; 
-    padding: 1rem;
-    background: url(https://cdn.imgpile.com/f/bIpr1VI_xl.webp);
-    background-position: center;
-    background-attachment: scroll;
-    border: white solid 2px;
-}
-
-
-.citate {
-    border-left: white solid 3px;
-    padding-left: 1rem;
-}
-
-.green { color: greenyellow; }
+h2 { text-align: center; }
 .red { color: red;}
+.green { color: green;}
+.text { text-align: justify;}
+    .btn.secondary{color:var(--muted);border-color:rgba(255,255,255,0.03)}
 
-
-
-#npc-wrapper {
-    position: relative;
-    right: 10px;
-    color: white;
-    width: 99% !important;
-    margin: 0px;
-    padding: 16px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-}
-
-  #npc-wrapper h2 {
-    margin: 0 0 12px;
-    font-size: 18px;
-  }
-
-  #addNpcBtn {
-    margin-bottom: 12px;
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid #888;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-  }
-
-  .npc-card {
-  width: 24% !important;      /* две карточки в ряд */
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  margin-bottom: 0; /* убираем нижний margin, так как gap уже есть */
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 8px;
-  background: rgba(255,255,255,0.05);
-  box-sizing: border-box;
-}
-
-  .npc-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-
-  .npc-row label {
-    flex: 0 0 140px;  /* фиксированная ширина для метки */
-    font-size: 13pt;
-    color: #fff;      /* белый текст */
-  }
-
-  .npc-row input {
-    flex: 1;
-    font-size: 13pt;
-    padding: 6px 8px;
-    color: #fff;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-  .npc-row textarea {
-  width: 100%;
-  font-size: 13pt;
-  padding: 6px 8px;
-  color: #fff;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 4px;
-  box-sizing: border-box;
-  line-height: 1.2em;
-  font-family: inherit;  /* чтобы шрифт совпадал с input */
-}
-
-  .npc-controls {
-    margin-top: 10px;
-    display: flex;
-    gap: 8px;
-  }
-
-  .npc-controls button {
-    font-size: 12px;
-    padding: 5px 10px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: transparent;
-    color: inherit;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-
- #npc-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-}
-
-.npc-card .npc-row:first-child input {
-  color: orange;   /* оранжевый текст для имени NPC */
-  font-weight: bold; /* можно сделать имя чуть более заметным */
-}
-
-::-webkit-scrollbar {
-  width: 6px;          /* толщина вертикального скролла */
-  height: 6px;         /* толщина горизонтального */
-}
-
-::-webkit-scrollbar-track {
-  background: black;   /* фон дорожки */
-}
-
-::-webkit-scrollbar-thumb {
-  background: gray;    /* цвет ползунка */
-  border-radius: 10px; /* скругление */
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a9a9a9; /* светлее при наведении */
-}
-
-
-/* --- Базовые стили оставляем как есть --- */
-
-/* Адаптация под планшеты */
-@media screen and (max-width: 1024px) {
-  .blocks,
-  .blocks2 {
-    grid-template-columns: 1fr 1fr;   /* две колонки */
-    grid-template-areas:
-      "d d"
-      "a b"
-      "c c";
-    gap: 1.5rem;
-    font-size: 13pt;
-  }
-
-  .npc-card {
-    width: 45% !important; /* по 2 карточки в ряд */
-  }
-}
-
-/* Адаптация под телефоны */
-@media screen and (max-width: 600px) {
-  .blocks,
-  .blocks2 {
-    grid-template-columns: 1fr;   /* одна колонка */
-    grid-template-areas:
-      "d"
-      "a"
-      "b"
-      "c";
-    gap: 1rem;
-    font-size: 12pt;
-    padding: 0.5rem;
-  }
-
-  .npc-card {
-    width: 100% !important; /* карточки в одну колонку */
-  }
-
-  #npc-wrapper {
-    padding: 8px;
-  }
-
-  #npc-wrapper h2 {
-    font-size: 16px;
-  }
-
-  .npc-row label {
-    flex: 0 0 100px;  /* уменьшаем ширину подписи */
-    font-size: 11pt;
-  }
-
-  .npc-row input,
-  .npc-row textarea {
-    font-size: 11pt;
-    padding: 4px 6px;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
+    @media (max-width:1000px){main{flex-direction:column}.npc-card{width:100%}}
