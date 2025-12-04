@@ -196,7 +196,7 @@ fields.forEach((field, index) => {
   row.appendChild(input);
 
   // Добавляем кнопки +1 / -1
-  const modifiable = ["Телосложение", "Ловкость", "Смекалка", "Интеллект"];
+  const modifiable = ["Телосложение", "Ловкость", "Смекалка", "Эмпатия"];
   if (modifiable.includes(field)) {
       const minusBtn = document.createElement('button');
       minusBtn.textContent = '-1';
@@ -286,6 +286,7 @@ fields.forEach((field, index) => {
     window._grimoire_save = saveAll; window._grimoire_load = loadAll;
   </script>
 </body>
+
 
 
 
