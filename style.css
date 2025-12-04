@@ -23,10 +23,22 @@
     .info-wrap p{line-height:1.45}
 
     /* right creator panel (page 2) */
-    .creator-wrap{background:linear-gradient(180deg, rgba(8,6,4,0.6), rgba(6,4,3,0.55));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    .creator-wrap {
+    background: linear-gradient(180deg, rgba(8, 6, 4, 0.6), rgba(6, 4, 3, 0.55));
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    width: 80rem;
+}
     #npc-list{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
 
-    .npc-card{width:320px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+.npc-card {
+    width: 400px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.25));
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
     .npc-row{display:flex;align-items:center;margin-bottom:8px}
     .npc-row label{flex:0 0 120px;font-size:13px}
     .npc-row input{flex:1;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)}
@@ -94,6 +106,7 @@ h2 { text-align: center; }
 }
 
     @media (max-width:1000px){main{flex-direction:column}.npc-card{width:100%}}
+
 
 
 
