@@ -165,42 +165,63 @@
       const card = document.createElement('div');
       card.className = 'npc-card';
 
-      fields.forEach((field, index) => {
-        const row = document.createElement('div');
-        row.className = 'npc-row';
+fields.forEach((field, index) => {
+  const row = document.createElement('div');
+  row.className = 'npc-row';
 
-        const label = document.createElement('label');
-        label.textContent = field + ':';
+  const label = document.createElement('label');
+  label.textContent = field + ':';
 
-        let input;
-        if (field === 'Таланты' || field === 'Оружие' || field === 'Доспехи') {
-        input = document.createElement('textarea');
-        input.placeholder = 'Введите значение...';
-        input.rows = 1;
-        input.style.overflow = 'hidden';
-        input.style.resize = 'none';
+  let input;
+  if (field === 'Таланты' || field === 'Оружие' || field === 'Доспехи') {
+    input = document.createElement('textarea');
+    input.rows = 1;
+    input.style.overflow = 'hidden';
+    input.style.resize = 'none';
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = input.scrollHeight + 'px';
+      saveAll();
+    });
+  } else {
+    input = document.createElement('input');
+    input.type = 'text';
+    input.addEventListener('input', saveAll);
+  }
 
-        // авто-увеличение высоты
-        input.addEventListener('input', () => { 
-        input.style.height = 'auto';
-        input.style.height = input.scrollHeight + 'px';
-        saveAll();
-        });
-        } else {
-        input = document.createElement('input');
-        input.type = 'text';
-        input.placeholder = 'Введите значение...';
-        input.addEventListener('input', saveAll);
-        }
+  if (index === 0) { input.style.color = 'orange'; input.style.fontWeight = 'bold'; }
+  if (data[field] !== undefined) input.value = data[field];
 
-        if (index === 0) { input.style.color = 'orange'; input.style.fontWeight = 'bold'; }
+  row.appendChild(label);
+  row.appendChild(input);
 
-        if (data[field] !== undefined) input.value = data[field];
+  // Добавляем кнопки +1 / -1
+  const modifiable = ["Телосложение", "Ловкость", "Смекалка", "Интеллект"];
+  if (modifiable.includes(field)) {
+      const minusBtn = document.createElement('button');
+      minusBtn.textContent = '-1';
+      minusBtn.className = 'stat-btn';
+      minusBtn.onclick = () => {
+          const val = parseInt(input.value || 0, 10);
+          input.value = val - 1;
+          saveAll();
+      };
 
-        row.appendChild(label);
-        row.appendChild(input);
-        card.appendChild(row);
-      });
+      const plusBtn = document.createElement('button');
+      plusBtn.textContent = '+1';
+      plusBtn.className = 'stat-btn';
+      plusBtn.onclick = () => {
+          const val = parseInt(input.value || 0, 10);
+          input.value = val + 1;
+          saveAll();
+      };
+
+      row.appendChild(minusBtn);
+      row.appendChild(plusBtn);
+  }
+
+  card.appendChild(row);
+});
 
       const controls = document.createElement('div');
       controls.className = 'npc-controls';
@@ -265,5 +286,6 @@
     window._grimoire_save = saveAll; window._grimoire_load = loadAll;
   </script>
 </body>
+
 
 
