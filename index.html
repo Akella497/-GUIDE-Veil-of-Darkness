@@ -173,18 +173,24 @@
         label.textContent = field + ':';
 
         let input;
-        if (field === 'Таланты') {
-          input = document.createElement('textarea');
-          input.placeholder = 'Введите значение...';
-          input.rows = 1;
-          input.style.overflow = 'hidden';
-          input.style.resize = 'none';
-          input.addEventListener('input', () => { input.style.height = 'auto'; input.style.height = input.scrollHeight + 'px'; saveAll(); });
+        if (field === 'Таланты' || field === 'Оружие' || field === 'Доспехи') {
+        input = document.createElement('textarea');
+        input.placeholder = 'Введите значение...';
+        input.rows = 1;
+        input.style.overflow = 'hidden';
+        input.style.resize = 'none';
+
+        // авто-увеличение высоты
+        input.addEventListener('input', () => { 
+        input.style.height = 'auto';
+        input.style.height = input.scrollHeight + 'px';
+        saveAll();
+        });
         } else {
-          input = document.createElement('input');
-          input.type = 'text';
-          input.placeholder = 'Введите значение...';
-          input.addEventListener('input', saveAll);
+        input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Введите значение...';
+        input.addEventListener('input', saveAll);
         }
 
         if (index === 0) { input.style.color = 'orange'; input.style.fontWeight = 'bold'; }
@@ -259,4 +265,5 @@
     window._grimoire_save = saveAll; window._grimoire_load = loadAll;
   </script>
 </body>
+
 
