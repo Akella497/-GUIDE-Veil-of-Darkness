@@ -284,8 +284,8 @@ main {
 
 .npc-row textarea {
     resize: vertical;
-    min-height: 60px;
-    max-height: 300px;
+    min-height: 80px;
+    height: auto;
 }
 
 /* Кнопки */
