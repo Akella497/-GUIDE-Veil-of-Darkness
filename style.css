@@ -286,6 +286,10 @@ main {
     resize: vertical;
     min-height: 80px;
     height: auto;
+    overflow-y: visible;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 /* Кнопки */
@@ -499,3 +503,4 @@ h2 {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, rgba(212, 175, 55, 0.6), rgba(168, 139, 47, 0.5));
 }
+
