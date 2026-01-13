@@ -1,116 +1,500 @@
-  :root{
-      --bg:#0b0a08; --panel:rgba(8,6,4,0.6); --accent:#c9a86b; --muted:#cfc6b8; --danger:#d55; --card-w:320px; --radius:10px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:'Merriweather', serif;background:var(--bg);color:var(--muted);-webkit-font-smoothing:antialiased}
-    body::before{content:'';position:fixed;inset:0;z-index:-2;background-image:url('https://cdn.imgpile.com/f/iqgryG1_xl.png');background-size:cover;filter:contrast(.9) brightness(.45);opacity:0.78}
-    body::after{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at center, rgba(0,0,0,0) 30%, rgba(0,0,0,0.6) 100%)}
-
-    header{max-width:1200px;margin:20px auto;padding:16px;border-radius:14px;background:var(--panel);border:1px solid rgba(255,255,255,0.03);display:flex;gap:14px;align-items:center}
-    .logo{width:60px;height:60px;border-radius:8px;background:linear-gradient(135deg,#111,#241);display:flex;align-items:center;justify-content:center}
-    header h1{margin:0;font-family:'Cinzel',serif;color:var(--accent);font-size:20px}
-    header p{margin:0;color:rgba(207,198,184,0.9);font-size:13px}
-
-    main{max-width:1200px;margin:18px auto;display:flex;gap:24px;padding:0 12px}
-
-    /* pages layout */
-    .page{display:none;flex:1}
-    .page.active{display:block}
-
-    /* left info panel (page 1) */
-    .info-wrap{background:linear-gradient(180deg, rgba(20,16,12,0.6), rgba(10,8,6,0.55));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .info-wrap h2{font-family:'Cinzel',serif;color:var(--accent)}
-    .info-wrap p{line-height:1.45}
-
-    /* right creator panel (page 2) */
-    .creator-wrap {
-    background: linear-gradient(180deg, rgba(8, 6, 4, 0.6), rgba(6, 4, 3, 0.55));
-    padding: 16px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    width: 80rem;
-    }
-
-    #npc-list{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
-
-    .npc-card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.25));
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    width: 400px;
-    }
-
-    .npc-row{display:flex;align-items:center;margin-bottom:8px}
-    .npc-row label{flex:0 0 120px;font-size:13px}
-    .npc-row input{flex:1;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)}
-    .npc-row textarea{width:100%;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted);resize:none}
-    .npc-controls{display:flex;gap:8px;margin-top:8px}
-
-    .top-actions{display:flex;gap:10px;margin-top:8px}
-    .btn {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-    color: var(--accent);
-    cursor: pointer;
-    background: linear-gradient(135deg, #111, #241);
+:root {
+    --bg: #0a0806;
+    --panel: rgba(12, 8, 6, 0.75);
+    --accent: #d4af37;
+    --accent-dim: #a88b2f;
+    --muted: #e0d5c7;
+    --text-secondary: #b8ad9f;
+    --danger: #c84545;
+    --success: #5a8f5a;
+    --card-w: 380px;
+    --radius: 12px;
+    --border-glow: rgba(212, 175, 55, 0.15);
 }
 
-h2 { text-align: center; }
-.red { color: red;}
-.green { color: green;}
-.text { text-align: justify;}
-.btn.secondary{color:var(--muted);border-color:rgba(255,255,255,0.03)}
-/* КРАСИВЫЕ КНОПКИ — только для NPC-карт */
-.npc-controls button,
-.stat-btn {
-    position: relative;
-    padding: 3px 8px; /* можно увеличить, если хочется побольше */
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.07);
-    background: linear-gradient(145deg, rgba(20,16,12,0.85), rgba(10,8,6,0.7));
-    color: var(--accent);
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Merriweather', serif;
+    background: var(--bg);
+    color: var(--muted);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+}
+
+/* Многослойный фон с анимацией */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    background-image: url('https://cdn.imgpile.com/f/iqgryG1_xl.png');
+    background-size: cover;
+    background-position: center;
+    filter: contrast(1.1) brightness(0.4);
+    opacity: 0.85;
+    animation: subtleFloat 20s ease-in-out infinite;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(40, 30, 20, 0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+@keyframes subtleFloat {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.02) translateY(-10px); }
+}
+
+/* Header с эффектом свечения */
+header {
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 20px 24px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(20, 15, 10, 0.9), rgba(12, 8, 6, 0.85));
+    border: 1px solid var(--border-glow);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+header:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(212, 175, 55, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #1a1410, #0f0c08);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.5),
+        inset 0 0 20px rgba(212, 175, 55, 0.05);
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05) rotate(5deg);
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.6),
+        0 0 25px rgba(212, 175, 55, 0.2),
+        inset 0 0 30px rgba(212, 175, 55, 0.1);
+}
+
+header h1 {
     font-family: 'Cinzel', serif;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    color: var(--accent);
+    font-size: 24px;
+    font-weight: 900;
+    text-shadow: 
+        0 2px 8px rgba(212, 175, 55, 0.3),
+        0 0 30px rgba(212, 175, 55, 0.1);
+    letter-spacing: 1px;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 13.5px;
+    margin-top: 4px;
+}
+
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    gap: 28px;
+    padding: 0 16px;
+}
+
+/* Улучшенные страницы */
+.page {
+    display: none;
+    flex: 1;
+    animation: fadeIn 0.5s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Информационная панель */
+.info-wrap {
+    background: linear-gradient(165deg, rgba(25, 18, 12, 0.85), rgba(12, 8, 6, 0.75));
+    padding: 28px;
+    border-radius: 16px;
+    border: 1px solid var(--border-glow);
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+}
+
+.info-wrap h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--accent);
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+    letter-spacing: 1.5px;
+}
+
+.info-wrap p {
+    line-height: 1.7;
+    margin-bottom: 14px;
+    color: var(--muted);
+}
+
+.info-wrap hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent) 80%, transparent);
+    margin: 20px 0;
+    opacity: 0.4;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+/* Панель создания NPC */
+.creator-wrap {
+    background: linear-gradient(165deg, rgba(15, 11, 8, 0.9), rgba(8, 6, 4, 0.8));
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid var(--border-glow);
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    width: 100%;
+    max-width: 1400px;
+    backdrop-filter: blur(10px);
+}
+
+#npc-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Карточки NPC */
+.npc-card {
+    background: linear-gradient(145deg, rgba(25, 18, 12, 0.7), rgba(15, 10, 8, 0.6));
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+    position: relative;
     overflow: hidden;
 }
 
-/* золотая подсветка */
+.npc-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.npc-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 175, 55, 0.25);
+    box-shadow: 
+        0 12px 32px rgba(0, 0, 0, 0.7),
+        0 0 25px rgba(212, 175, 55, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.npc-card:hover::before {
+    opacity: 1;
+}
+
+.npc-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.npc-row label {
+    flex: 0 0 130px;
+    font-size: 13.5px;
+    color: var(--accent-dim);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.npc-row input,
+.npc-row textarea {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    background: rgba(10, 8, 6, 0.6);
+    color: var(--muted);
+    font-family: 'Merriweather', serif;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.npc-row input:focus,
+.npc-row textarea:focus {
+    outline: none;
+    border-color: rgba(212, 175, 55, 0.4);
+    background: rgba(15, 12, 10, 0.7);
+    box-shadow: 
+        inset 0 2px 6px rgba(0, 0, 0, 0.4),
+        0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+.npc-row textarea {
+    resize: none;
+    min-height: 40px;
+}
+
+/* Кнопки */
+.btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    background: linear-gradient(145deg, rgba(25, 18, 12, 0.95), rgba(15, 10, 8, 0.9));
+    color: var(--accent);
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.6),
+        0 0 25px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.5),
+        inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.btn.secondary {
+    color: var(--text-secondary);
+    border-color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(145deg, rgba(20, 15, 12, 0.8), rgba(12, 8, 6, 0.7));
+}
+
+/* Кнопки управления статами */
+.stat-btn {
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(145deg, rgba(30, 22, 15, 0.9), rgba(18, 13, 10, 0.85));
+    color: var(--accent);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
 .stat-btn::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 30% 40%, rgba(201,168,107,0.25), transparent 60%);
+    background: radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.3), transparent 60%);
     opacity: 0;
-    transition: 0.4s ease;
+    transition: opacity 0.3s ease;
 }
 
-/* hover */
 .stat-btn:hover {
     transform: translateY(-2px);
-    box-shadow:
-        0 0 6px rgba(201,168,107,0.3),
-        inset 0 0 8px rgba(201,168,107,0.15);
-    border-color: rgba(201,168,107,0.35);
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(212, 175, 55, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .stat-btn:hover::before {
     opacity: 1;
 }
 
-/* active */
 .stat-btn:active {
     transform: translateY(0);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-    @media (max-width:1000px){main{flex-direction:column}.npc-card{width:100%}}
+/* Кнопки управления NPC */
+.npc-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+}
 
+.npc-controls button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(145deg, rgba(25, 18, 12, 0.9), rgba(15, 10, 8, 0.85));
+    color: var(--accent);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex: 1;
+}
 
+.npc-controls button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
 
+.top-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
 
+/* Цветовые акценты */
+.red { color: #e74c3c; }
+.green { color: #52b788; }
 
+.text {
+    text-align: justify;
+}
 
+h2 {
+    text-align: center;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    main {
+        flex-direction: column;
+    }
+    
+    #npc-list {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .logo {
+        margin: 0 auto;
+    }
+    
+    #npc-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .creator-wrap {
+        padding: 16px;
+    }
+    
+    .npc-card {
+        width: 100%;
+    }
+    
+    .top-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(10, 8, 6, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.4), rgba(168, 139, 47, 0.3));
+    border-radius: 6px;
+    border: 2px solid rgba(10, 8, 6, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.6), rgba(168, 139, 47, 0.5));
+}
